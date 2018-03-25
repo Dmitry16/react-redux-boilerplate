@@ -19,8 +19,9 @@ import { Container_main } from '../components/styled/styled-components/wrappers'
 import AuthPage from './authPage';
 import MainPage from './mainPage';
 import About from '../components/about';
-import ExchangeCalculator from '../components/exchangeCalculator';
 import { Header, Footer } from '../components/header';
+import ExchangeCalculator from '../components/exchangeCalculator';
+import ExchangeRatesChart from '../components/exchangeRatesChart';
 
 //Material-UI Components
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -51,6 +52,7 @@ class App extends Component {
             this.props.loggedIn
               ? (<MainPage {...this.props}>
                   <ExchangeCalculator {...this.props}/>
+                  <ExchangeRatesChart />
                 </MainPage>)
               : (<AuthPage {...this.props} />)
     )
