@@ -12,13 +12,11 @@ export default class MainPage extends Component {
 }
  render() {
 
-   // {React.cloneElement(this.props.children, this.props)}
-
    let children = Children.map(this.props.children, (child =>
      React.cloneElement(child, this.props)
    ))
 
-   console.log('children', children);
+   // console.log('children', children);
 
    return (
     <Paper style={styles.mainPaperStyle} zDepth={1} >

@@ -62,10 +62,15 @@ export default class ExchangeCalculator extends Component {
       padding: 0,
       alignItems: 'baseline'
     }
+    const tfStyle = {
+      margin: 20,
+      marginBottom: 0,
+      width: 25
+    }
 
     console.log(this.props);
 
-    let currArr = Object.entries(obj).map((key,ind)=>{
+    let currArr = Object.entries(this.props.currencies).map((key,ind)=>{
       return (
         <MenuItem value={ind} primaryText={key[0]} />
       )
@@ -73,35 +78,39 @@ export default class ExchangeCalculator extends Component {
 
     return (
       <Paper style={calculatorStyle}>
-        <TextField
-        id="tf"
-        defaultValue="1"
-        style={{marginBottom:'-5px',width:'50px',background:'pink'}}
-        />
-        <SelectField
-          value = {0}
-          floatingLabelText = "Currencies"
-          onChange = {this.handleSelectedCurrencyChange}
-          menuItemStyle = {{color:'steelblue'}}
-          style={{margin:0,width:'auto',background:'khaki'}}
-        >
-        <MenuItem value={0} primaryText='USD' />
-        </SelectField>
+        <div>
+          <TextField
+          id="tf"
+          defaultValue="1"
+          style={tfStyle}
+          />
+          <SelectField
+            value = {0}
+            floatingLabelText = "Currencies"
+            onChange = {this.handleSelectedCurrencyChange}
+            menuItemStyle = {{color:'steelblue'}}
+            style={{margin:0,width:'auto'}}
+          >
+          <MenuItem value={0} primaryText='USD' />
+          </SelectField>
+        </div>
 
-        <TextField
-        id="tf"
-        defaultValue="1"
-        style={{width:'50px'}}
-        />
-        <SelectField
-          value = {this.state.value}
-          floatingLabelText = "Currencies"
-          onChange = {this.handleSelectedCurrencyChange}
-          menuItemStyle = {{color:'steelblue'}}
-          style={{width:'auto'}}
-        >
-          { currArr }
-        </SelectField>
+        <div>
+          <TextField
+          id="tf"
+          defaultValue="1"
+          style={tfStyle}
+          />
+          <SelectField
+            value = {this.state.value}
+            floatingLabelText = "Currencies"
+            onChange = {this.handleSelectedCurrencyChange}
+            menuItemStyle = {{color:'steelblue'}}
+            style={{width:'auto'}}
+          >
+            { currArr }
+          </SelectField>
+        </div>
       </Paper>
     )
   }

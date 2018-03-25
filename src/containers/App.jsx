@@ -51,7 +51,7 @@ class App extends Component {
     const renderInit = () => (
             this.props.loggedIn
               ? (<MainPage {...this.props}>
-                  <ExchangeCalculator {...this.props}/>
+                  <ExchangeCalculator />
                   <ExchangeRatesChart />
                 </MainPage>)
               : (<AuthPage {...this.props} />)
