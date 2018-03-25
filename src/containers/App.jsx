@@ -19,6 +19,7 @@ import { Container_main } from '../components/styled/styled-components/wrappers'
 import AuthPage from './authPage';
 import MainPage from './mainPage';
 import About from '../components/about';
+import ExchangeCalculator from '../components/exchangeCalculator';
 import { Header, Footer } from '../components/header';
 
 //Material-UI Components
@@ -44,13 +45,15 @@ class App extends Component {
 
     // { loggedIn } = this.props;
 
-    console.log(this.props.loggedIn);
+    console.log(this.props);
 
-    const renderInit = () => {
-      return this.props.loggedIn
-              ? (<MainPage {...this.props} />)
+    const renderInit = () => (
+            this.props.loggedIn
+              ? (<MainPage {...this.props}>
+                  <ExchangeCalculator {...this.props}/>
+                </MainPage>)
               : (<AuthPage {...this.props} />)
-    }
+    )
 
     return (
       <Router>
