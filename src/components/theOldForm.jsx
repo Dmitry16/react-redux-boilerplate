@@ -1,53 +1,55 @@
-import React, { Component, Fragment } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import { newSearch } from '../actions/searchActions';
-import { fetchData } from '../actions/fetchDataAction';
-import { setToLocalStorage } from '../api/localStorage';
-import ProgressLoading from './materialUI/progressLoading';
+//Libs
+import React, { Component, Fragment } from 'react'
+
+import RaisedButton from 'material-ui/RaisedButton'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
+import { newSearch } from '../actions/searchActions'
+import { fetchData } from '../actions/fetchDataAction'
+import { setToLocalStorage } from '../api/localStorage'
+import ProgressLoading from './materialUI/progressLoading'
 
 export default class SearchForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       primaryCheapest: true,
       primaryFastest: false,
       progressLoadingStatus:'hide',
     }
-    this.handleChangeFrom = this.handleChangeFrom.bind(this);
-    this.handleChangeTo = this.handleChangeTo.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeFrom = this.handleChangeFrom.bind(this)
+    this.handleChangeTo = this.handleChangeTo.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount () {
-    console.log('%c progressLoadingStatus111','color: green',this.state);
+    console.log('%c progressLoadingStatus111','color: green',this.state)
     this.setState({progressLoadingStatus:
                   (this.state.progressLoadingStatus === 'loading') ? 'ready' : 'hide'
-                });
+                })
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('%c componentWillReceiveProps::','color:green;font-size:15px',nextProps);
+    console.log('%c componentWillReceiveProps::','color:greenfont-size:15px',nextProps)
     this.setState({
       progressLoadingStatus: (this.state.progressLoadingStatus === 'loading'
                               || !nextProps.searchResultsBlockVisible) ? 'hide' : 'loading',
-    });
+    })
   }
 
   handleChangeFrom (e, ind, value) {
     this.setState({
       strFrom: e.target.innerText,
-    });
+    })
   }
   handleChangeTo (e, ind, value) {
     this.setState({
       strTo: e.target.innerText,
-    });
+    })
   }
   handleClick (e) {
-    const value = e.target.innerText==='CHEAPEST' ? 'cheapest' : 'fastest';
+    const value = e.target.innerText==='CHEAPEST' ? 'cheapest' : 'fastest'
     this.setState(prevState => ({
       travelMode: prevState.travelMode = value,
       primaryCheapest: (value==='cheapest')
@@ -56,34 +58,34 @@ export default class SearchForm extends Component {
       primaryFastest: (value==='fastest')
                         ? prevState.primaryCheapest=true
                         : prevState.primaryCheapest=false,
-    }));
+    }))
   }
 
   handleSubmit () {
     let [...searchParams] = [this.state.valueFrom, this.state.valueTo,
-      this.state.strFrom, this.state.strTo, this.state.travelMode];
+      this.state.strFrom, this.state.strTo, this.state.travelMode]
 
-    // this.props.dispatch(newSearch(...searchParams));
-    // this.props.dispatch(fetchData(...searchParams));
-    // setToLocalStorage(searchParams);
-    this.setState({progressLoadingStatus: 'loading'});
+    // this.props.dispatch(newSearch(...searchParams))
+    // this.props.dispatch(fetchData(...searchParams))
+    // setToLocalStorage(searchParams)
+    this.setState({progressLoadingStatus: 'loading'})
   }
 
   render() {
 
-    console.log('this.props in form',this.props);
-    console.log('this.state in form',this.state);
+    console.log('this.props in form',this.props)
+    console.log('this.state in form',this.state)
 
     const buttonStyle = {
       margin: 0,
       width: '50%',
-    };
+    }
     const h2Style = {
       fontWeight: 400,
-    };
+    }
     const formStyle = {
       width:'80%'
-    };
+    }
 
     return (
       <Fragment>
@@ -132,6 +134,6 @@ export default class SearchForm extends Component {
         style={{marginTop:10}} onClick={this.handleSubmit} />
         <ProgressLoading status={this.state.progressLoadingStatus} />
       </Fragment>
-    );
+    )
   }
 }

@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../actions/actionCreators';
+
 //APIs,Actions
 // import { getFromLocalStorage } from '../api/localStorage';
 // import { lsRecInjection } from '../actions/localStorageActions';
@@ -13,6 +16,7 @@ import '../css/App.css';
 //Components
 import ErrorBoundary from '../components/errorBoundary';
 import { Container_main } from '../components/styled/styled-components/wrappers';
+import AuthPage from './authPage';
 import MainPage from './mainPage';
 import About from '../components/about';
 import { Header, Footer } from '../components/header';
@@ -38,19 +42,24 @@ class App extends Component {
 
   render() {
 
-    const renderMainPage = () => {
-      return (
-        <MainPage {...this.props} />
-      )
+    // { loggedIn } = this.props;
+
+    console.log(this.props.loggedIn);
+
+    const renderInit = () => {
+      return this.props.loggedIn
+              ? (<MainPage {...this.props} />)
+              : (<AuthPage {...this.props} />)
     }
+
     return (
       <Router>
         <ErrorBoundary>
           <MuiThemeProvider>
             <Container_main>
               <Header />
-                <Route exact={true} path='/' render={renderMainPage} />
-                <Route exact={true} path='/about' component={About} />
+                <Route exact={true} path='/' render={renderInit} />
+                <Route path='/about' component={About} />
             </Container_main>
           </MuiThemeProvider>
         </ErrorBoundary>
@@ -59,9 +68,18 @@ class App extends Component {
   }
 }
 
+
+
 const mapStateToProps = store => ({
     searchResultsBlockVisible: store.searchResults.visible,
     initialDialog: store.appConfig.initialDialog,
+    form: store.form,
+    currencies: store.currency.currencies,
+    loggedIn: store.currency.loggedIn
   });
+
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators(actionCreators, dispatch);
+// }
 
 export default connect(mapStateToProps)(App)
