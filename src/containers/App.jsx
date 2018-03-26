@@ -1,5 +1,5 @@
 //Libs
-import React, { Component } from 'react';
+import React, { Component, propTypes } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,7 +21,7 @@ import MainPage from './mainPage';
 import About from '../components/about';
 import { Header, Footer } from '../components/header';
 import ExchangeCalculator from '../components/exchangeCalculator';
-import ExchangeRatesChart from '../components/exchangeRatesChart';
+import RatesChart from '../components/ratesChart';
 
 //Material-UI Components
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -46,15 +46,17 @@ class App extends Component {
 
     // { loggedIn } = this.props;
 
-    console.log(this.props);
+    // console.log('this.props.loggedIn',this.props.loggedIn)
 
+
+    // this.props.loggedIn
     const renderInit = () => (
-            this.props.loggedIn
+      true
               ? (<MainPage {...this.props}>
                   <ExchangeCalculator />
-                  <ExchangeRatesChart />
+                  <RatesChart />
                 </MainPage>)
-              : (<AuthPage {...this.props} />)
+              : (<MainPage {...this.props} />)
     )
 
     return (

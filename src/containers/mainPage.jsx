@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react'
+import React, { Component, Children, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
 // import SelectField from 'material-ui/SelectField'
@@ -16,11 +16,11 @@ export default class MainPage extends Component {
      React.cloneElement(child, this.props)
    ))
 
-   // console.log('children', children);
+   console.log('this.props.children', this.props.children);
 
    return (
     <Paper style={styles.mainPaperStyle} zDepth={1} >
-      { children }
+      { this.props.children }
     </Paper>
     )
   }

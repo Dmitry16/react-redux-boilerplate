@@ -1,5 +1,5 @@
 //Libs
-import React, { Component } from 'react'
+import React, { Component, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
 import SelectField from 'material-ui/SelectField'
@@ -70,7 +70,7 @@ export default class ExchangeCalculator extends Component {
 
     console.log(this.props);
 
-    let currArr = Object.entries(this.props.currencies).map((key,ind)=>{
+    let currArr = Object.entries(obj).map((key,ind)=>{
       return (
         <MenuItem value={ind} primaryText={key[0]} />
       )
