@@ -1,5 +1,6 @@
 import React, { Component, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
+import * as styles from '../css/mainCSS'
 
 const obj = {
   AED
@@ -37,8 +38,28 @@ BAM
 1.582704
 }
 
+const brickStyle = {
+  ...styles.mainPaperStyle,
+  margin: 5,
+}
 
-const ChartSetupHOC = (Component, style) => {
+const styleIt = (f) => (style) => {
+  return
+}
+
+const makeCurrArr = (n = Object.entries(obj).length, style) => {
+  let currArr
+  return (
+    currArr = Object.entries(obj).map((key,ind)=>{
+      if (ind < n)
+      return (
+        <Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>
+      )
+    })
+  )
+}
+
+const ChartSetupHOC = (Component) => {
 
   return class ChartSetup extends Component {
     constructor(props) {
@@ -50,20 +71,22 @@ const ChartSetupHOC = (Component, style) => {
 
     clickHandler = () => {
       this.setState({
-        chartSetup: true,
+        // chartSetup: true,
         btnLabel: this.state.btnLabel==='chart' ? 'setup' : 'chart'
       })
+    }
+
+    renderCurrencies = () => {
+      if (this.state.btnLabel==='chart')
+        return makeCurrArr()
+      else
+        return makeCurrArr(5, brickStyle)
     }
 
     render() {
 
       console.log('ChartSetupHOC:', this.state);
 
-      let currArr = Object.entries(obj).map((key,ind)=>{
-          return (
-            <Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>
-          )
-      })
 
       return (
         <Component
@@ -71,7 +94,7 @@ const ChartSetupHOC = (Component, style) => {
           btnLabel={this.state.btnLabel}
           {...this.props}
         >
-          { currArr }
+          { this.renderCurrencies() }
         </Component>
       )
     }

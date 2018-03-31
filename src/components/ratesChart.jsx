@@ -9,10 +9,6 @@ const chartStyle = {
   ...styles.mainPaperStyle,
   alignItems: 'baseline'
 }
-const brickStyle = {
-  ...styles.mainPaperStyle,
-  margin: 5
-}
 
 class RatesChart extends Component {
   constructor(props) {
@@ -38,10 +34,12 @@ class RatesChart extends Component {
           label={this.props.btnLabel}
           onClick={this.props.callback}
         />
+
         { this.props.children }
+
       </Paper>
      )
   }
 }
 
-export default ChartSetupHOC(RatesChart, brickStyle)
+export default ChartSetupHOC(RatesChart)
