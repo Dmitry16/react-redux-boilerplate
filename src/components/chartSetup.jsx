@@ -1,6 +1,7 @@
 import React, { Component, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
+import ReduxCheckBox from './reduxCheckBox'
 
 const obj = {
   AED
@@ -43,18 +44,28 @@ const brickStyle = {
   margin: 5,
 }
 
-const styleIt = (f) => (style) => {
-  return
+const insertElement = (element) => (elementToInsert) => {
+  return (
+    <div style={{border:'3px solid blue'}}>
+      { elementToInsert }
+      { element }
+    </div>
+  )
 }
 
 const makeCurrArr = (n = Object.entries(obj).length, style) => {
   let currArr
+  let elementToInsert = <ReduxCheckBox />
   return (
     currArr = Object.entries(obj).map((key,ind)=>{
-      if (ind < n)
-      return (
-        <Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>
-      )
+      if (n === 5 && ind < 5)
+        return (
+          <Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>
+        )
+      else if (n !== 5 )
+        return (
+          insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)(elementToInsert)
+        )
     })
   )
 }
@@ -87,7 +98,6 @@ const ChartSetupHOC = (Component) => {
 
       console.log('ChartSetupHOC:', this.state);
 
-
       return (
         <Component
           callback={this.clickHandler}
@@ -95,6 +105,7 @@ const ChartSetupHOC = (Component) => {
           {...this.props}
         >
           { this.renderCurrencies() }
+
         </Component>
       )
     }

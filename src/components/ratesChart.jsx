@@ -19,7 +19,6 @@ class RatesChart extends Component {
     }
   }
 
-
   render() {
 
     console.log('RatesChart statezzzz:', this.state);

@@ -12,11 +12,11 @@ const renderTextField = ({
   ...custom
 }) => (
   <TextField
-  hintText={label}
-  floatingLabelText={label}
-  errorText={touched && error}
-  {...input}
-  {...custom}
+    hintText={label}
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    {...custom}
   />
 )
 
