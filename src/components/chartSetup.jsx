@@ -56,7 +56,7 @@ const insertElement = (element) => (elementToInsert) => {
 
 const makeCurrArr = (n = Object.entries(obj).length, style) => {
   let currArr
-  let elementToInsert = <Checkbox />
+  // let elementToInsert = <Checkbox />
   return (
     currArr = Object.entries(obj).map((key,ind)=>{
       if (n === 5 && ind < 5)
@@ -65,7 +65,8 @@ const makeCurrArr = (n = Object.entries(obj).length, style) => {
         )
       else if (n !== 5 )
         return (
-          insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)(elementToInsert)
+          insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
+            (<Checkbox cur={key[0]} val={key[1]}/>)
         )
     })
   )
