@@ -8,7 +8,10 @@ export class Checkbox extends Component {
      }
   }
   handleChange = () => {
-    console.log('kukuuuuu!');
+    this.setState({
+      checked: !this.state.checked
+    });
+    console.log('kukuuuuu!', this.refs.checkBox.checked);
   }
 
   render() {
@@ -16,6 +19,7 @@ export class Checkbox extends Component {
     return (
         <input
           type="checkbox"
+          ref='checkBox'
           checked={this.state.checked}
           onChange={this.handleChange}
         />
