@@ -1,8 +1,8 @@
 import React, { Component, propTypes } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
-import ChartForm from './chartForm'
-import { ReduxCheckbox } from './reduxCheckBox'
+// import ChartForm from './chartForm'
+import { Checkbox } from './checkBox'
 
 const obj = {
   AED
@@ -47,7 +47,7 @@ const brickStyle = {
 
 const insertElement = (element) => (elementToInsert) => {
   return (
-    <div>
+    <div style={{border:'3px solid blue'}}>
       { elementToInsert }
       { element }
     </div>
@@ -56,7 +56,7 @@ const insertElement = (element) => (elementToInsert) => {
 
 const makeCurrArr = (n = Object.entries(obj).length, style) => {
   let currArr
-  let elementToInsert = {border:'3px solid blue'}
+  let elementToInsert = <Checkbox />
   return (
     currArr = Object.entries(obj).map((key,ind)=>{
       if (n === 5 && ind < 5)
@@ -65,7 +65,7 @@ const makeCurrArr = (n = Object.entries(obj).length, style) => {
         )
       else if (n !== 5 )
         return (
-          insertElement(ReduxCheckbox)(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
+          insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)(elementToInsert)
         )
     })
   )
@@ -92,9 +92,7 @@ const ChartSetupHOC = (Component) => {
       if (this.state.btnLabel==='chart')
         return (
 
-          <ChartForm CurrencyWithCheckBox={ makeCurrArr() } >
-
-          </ChartForm>
+            makeCurrArr()
 
         )
       else
