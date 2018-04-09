@@ -21,7 +21,7 @@ class RatesChart extends Component {
 
   render() {
 
-    console.log('RatesChart statezzzz:', this.state);
+    console.log('RatesChart statzz, propzz:', this.state, this.props);
 
     // { this.props.currArr ? this.props.currArr : currArr }
      return(

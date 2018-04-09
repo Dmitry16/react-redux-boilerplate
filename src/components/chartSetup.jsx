@@ -54,25 +54,7 @@ const insertElement = (element) => (elementToInsert) => {
   )
 }
 
-const makeCurrArr = (n = Object.entries(obj).length, style) => {
-  let currArr
-  // let elementToInsert = <Checkbox />
-  return (
-    currArr = Object.entries(obj).map((key,ind)=>{
-      if (n === 5 && ind < 5)
-        return (
-          <Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>
-        )
-      else if (n !== 5 )
-        return (
-          insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
-            (<Checkbox cur={key[0]} val={key[1]}/>)
-        )
-    })
-  )
-}
-
-const ChartSetupHOC = (Component) => {
+const ChartSetupHOC = (Component, props) => {
 
   return class ChartSetup extends Component {
     constructor(props) {
@@ -89,20 +71,41 @@ const ChartSetupHOC = (Component) => {
       })
     }
 
+    makeCurrArr = (n = Object.entries(obj).length, style) => {
+      let currArr
+      // let elementToInsert = <Checkbox />
+      return (
+        currArr = Object.entries(obj).map((key,ind)=>{
+          if (n === 5 && ind < 5)
+            return (
+              <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
+            )
+          else if (n !== 5 )
+            return (
+              insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
+                (<Checkbox cur={key[0]} val={key[1]} dispatch={this.props.dispatch}/>)
+            )
+        })
+      )
+    }
+
     renderCurrencies = () => {
-      if (this.state.btnLabel==='chart')
+      if (this.state.btnLabel==='chart') {
+
+      console.log('propzz in renderCurrencies', this.props);
+
         return (
 
-            makeCurrArr()
+            this.makeCurrArr()
 
         )
-      else
-        return makeCurrArr(5, brickStyle)
+      } else
+        return this.makeCurrArr(5, brickStyle)
     }
 
     render() {
 
-      console.log('ChartSetupHOC:', this.state);
+      console.log('ChartSetupHOC state, props:', this.state, this.props);
 
       return (
         <Component
@@ -110,7 +113,7 @@ const ChartSetupHOC = (Component) => {
           btnLabel={this.state.btnLabel}
           {...this.props}
         >
-          { this.renderCurrencies() }
+          { this.renderCurrencies(this.props) }
 
         </Component>
       )

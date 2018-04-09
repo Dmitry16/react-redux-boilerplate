@@ -46,15 +46,15 @@ class App extends Component {
 
     // { loggedIn } = this.props;
 
-    // console.log('this.props.loggedIn',this.props.loggedIn)
+    console.log('this.props' ,this.props)
 
 
     // this.props.loggedIn
     const renderInit = () => (
       true
               ? (<MainPage {...this.props}>
-                  <ExchangeCalculator />
-                  <RatesChart />
+                  <ExchangeCalculator {...this.props} />
+                  <RatesChart {...this.props} />
                 </MainPage>)
               : (<MainPage {...this.props} />)
     )
@@ -75,7 +75,9 @@ class App extends Component {
   }
 }
 
-
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators(actionCreators, dispatch);
+// }
 
 const mapStateToProps = store => ({
     searchResultsBlockVisible: store.searchResults.visible,
@@ -84,9 +86,5 @@ const mapStateToProps = store => ({
     currencies: store.currency.currencies,
     loggedIn: store.currency.loggedIn
   });
-
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators(actionCreators, dispatch);
-// }
 
 export default connect(mapStateToProps)(App)

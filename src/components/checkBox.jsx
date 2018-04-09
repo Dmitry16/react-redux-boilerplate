@@ -9,20 +9,22 @@ export class Checkbox extends Component {
      }
   }
   handleChange = () => {
-    const { cur, val } = this.props;
+    const { cur, val, dispatch } = this.props;
     this.setState({
       checked: !this.state.checked
     });
     // console.log('kukuuuuu!', this.refs.checkBox.checked);
     if (this.refs.checkBox.checked)
-      addCurrency(cur, val);
+      dispatch(addCurrency(cur, val));
     if (!this.refs.checkBox.checked) {
-      removeCurrency(cur, val);
+      dispatch(removeCurrency(cur, val));
       // console.log(this.props.cur);
     }
   }
 
   render() {
+
+    console.log('checkbox propzz', this.props);
 
     return (
         <input

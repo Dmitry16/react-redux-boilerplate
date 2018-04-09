@@ -1,12 +1,16 @@
-export function addCurrency() {
-  console.log('CURRENCY_ADDED');
+export function addCurrency(cur, val) {
+  // console.log('CURRENCY_ADDED', cur, val);
   return {
-    type: 'CURRENCY_ADDED'
+    type: 'CURRENCY_ADDED',
+    cur,
+    val
   }
 }
-export function removeCurrency(cur) {
-  console.log('CURRENCY_REMOVED', cur);
+export function removeCurrency(cur, val) {
+  // console.log('CURRENCY_REMOVED', cur, val);
   return {
-    type: 'CURRENCY_REMOVED'
+    type: 'CURRENCY_REMOVED',
+    cur,
+    val
   }
 }
