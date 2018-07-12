@@ -6,13 +6,12 @@ import searchResultsReducer from './searchResultsReducer'
 import appConfigReducer from './appConfigReducer'
 
 import { reducer as formReducer } from 'redux-form'
-import currencyReducer from './currencyReducer'
+import { currenciesReducer } from './currencyReducer'
 
 export default combineReducers({
   searchResults: searchResultsReducer,
-  // searchOptions: searchOptionsReducer,
   appConfig: appConfigReducer,
   form: formReducer,
-  currency: currencyReducer,
+  currency: currenciesReducer,
   routing: routerReducer
 })
