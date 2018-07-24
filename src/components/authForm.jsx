@@ -23,12 +23,20 @@ const renderTextField = ({
 const submit = ({ appKey }, dispatch) => {
   return new Promise((resolve, reject) => {
     dispatch({
-      type: 'FETCH_CURRENCIES',
+      type: 'AUTH',
       appKey,
       resolve,
       reject
     })
-  }).catch((error) => {
+  })
+  // .then((resolve, appKey) => {
+  //   console.log('aaaaaa');
+  //   if (appKey === 'qq') {
+  //     resolve('urrrra!');
+  //     console.log('zzzzz');
+  //   }
+  // })
+  .catch((error) => {
     throw new SubmissionError(error);
   })
 }

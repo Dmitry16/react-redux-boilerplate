@@ -4,41 +4,6 @@ import * as styles from '../css/mainCSS'
 // import ChartForm from './chartForm'
 import { Checkbox } from './checkBox'
 
-const obj = {
-  AED
-:
-3.673097,
-AFN
-:
-69.375,
-ALL
-:
-105.2,
-AMD
-:
-480,
-ANG
-:
-1.783141,
-AOA
-:
-214.584,
-ARS
-:
-20.1755,
-AUD
-:
-1.299545,
-AWG
-:
-1.784998,
-AZN
-:
-1.7025,
-BAM
-:
-1.582704
-}
 
 const brickStyle = {
   ...styles.mainPaperStyle,
@@ -67,15 +32,15 @@ const ChartSetupHOC = (Component, props) => {
     clickHandler = () => {
       this.setState({
         // chartSetup: true,
-        btnLabel: this.state.btnLabel==='chart' ? 'setup' : 'chart'
+        btnLabel: this.state.bugtnLabel==='chart' ? 'setup' : 'chart'
       })
     }
 
-    makeCurrArr = (n = Object.entries(obj).length, style) => {
+    makeCurrArr = (n = Object.entries(this.props.currencies).length, style) => {
       let currArr
       // let elementToInsert = <Checkbox />
       return (
-        currArr = Object.entries(obj).map((key,ind)=>{
+        currArr = Object.entries(this.props.currencies).map((key,ind)=>{
           if (n === 5 && ind < 5)
             return (
               <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
@@ -91,9 +56,7 @@ const ChartSetupHOC = (Component, props) => {
 
     renderCurrencies = () => {
       if (this.state.btnLabel==='chart') {
-
-      console.log('propzz in renderCurrencies', this.props);
-
+      // console.log('propzz in renderCurrencies', this.props);
         return (
 
             this.makeCurrArr()

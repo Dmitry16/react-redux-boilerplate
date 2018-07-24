@@ -17,10 +17,10 @@ export default class AuthPage extends Component {
  super(props)
  }
 
- submit = values => {
-   // print the form values to the console
-   console.log(values)
- }
+ // submit = values => {
+ //   // print the form values to the console
+ //   console.log(values)
+ // }
 
  render() {
    // console.log('main page props:',this.props)

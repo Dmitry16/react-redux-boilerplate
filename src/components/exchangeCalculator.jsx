@@ -5,43 +5,6 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
 
-const obj = {
-  AED
-:
-3.673097,
-AFN
-:
-69.375,
-ALL
-:
-105.2,
-AMD
-:
-480,
-ANG
-:
-1.783141,
-AOA
-:
-214.584,
-ARS
-:
-20.1755,
-AUD
-:
-1.299545,
-AWG
-:
-1.784998,
-AZN
-:
-1.7025,
-BAM
-:
-1.582704
-}
-
-
 export default class ExchangeCalculator extends Component {
   constructor(props) {
     super(props)
@@ -56,6 +19,10 @@ export default class ExchangeCalculator extends Component {
   }
   render() {
 
+    const { currencies } = this.props;
+
+    console.log('exchangeCalculator render', this.props);
+
     const calculatorStyle = {
       ...styles.mainPaperStyle,
       margin: 0,
@@ -68,9 +35,8 @@ export default class ExchangeCalculator extends Component {
       width: 25
     }
 
-    console.log(this.props);
 
-    let currArr = Object.entries(obj).map((key,ind)=>{
+    let currArr = Object.entries(currencies).map((key,ind)=>{
       return (
         <MenuItem value={ind} primaryText={key[0]} />
       )

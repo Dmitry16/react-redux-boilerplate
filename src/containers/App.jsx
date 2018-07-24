@@ -1,5 +1,5 @@
 //Libs
-import React, { Component, propTypes } from 'react';
+import React, { Component, propTypes, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,7 +15,7 @@ import { showInitialDialog } from '../actions/initialDialogActions';
 import '../css/App.css';
 //Components
 import ErrorBoundary from '../components/errorBoundary';
-import { Container_main } from '../components/styled/styled-components/wrappers';
+import { ContainerMain } from '../components/styled/styled-components/wrappers';
 import AuthPage from './authPage';
 import MainPage from './mainPage';
 import About from '../components/about';
@@ -31,43 +31,48 @@ class App extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    // let localStorageRec = getFromLocalStorage();
-    //
-    // if (localStorageRec.length !== 0) {
-    //   console.log('localStorageRec',localStorageRec[localStorageRec.length-1]);
-    //   this.props.dispatch(lsRecInjection(localStorageRec[localStorageRec.length-1]));
-    //   this.props.dispatch(fetchData(...localStorageRec[localStorageRec.length-1]));
-    // }
-    this.props.dispatch(showInitialDialog());
-  }
+  // componentWillMount() {
+  //   let localStorageRec = getFromLocalStorage();
+  //
+  //   if (localStorageRec.length !== 0) {
+  //     console.log('localStorageRec',localStorageRec[localStorageRec.length-1]);
+  //     this.props.dispatch(lsRecInjection(localStorageRec[localStorageRec.length-1]));
+  //     this.props.dispatch(fetchData(...localStorageRec[localStorageRec.length-1]));
+  //   }
+  //   this.props.dispatch(showInitialDialog());
+  // }
 
   render() {
 
-    // { loggedIn } = this.props;
+  const  { loggedIn, form } = this.props;
 
-    console.log('this.props' ,this.props)
+    // console.log('App render this.props', this.props)
 
-
-    // this.props.loggedIn
-    const renderInit = () => (
-      true
-              ? (<MainPage {...this.props}>
-                  <ExchangeCalculator {...this.props} />
-                  <RatesChart {...this.props} />
-                </MainPage>)
-              : (<MainPage {...this.props} />)
-    )
+    const renderInit = () => {
+      return (
+        <MainPage {...this.props}>
+          { loggedIn
+            ?
+              <Fragment>
+                <ExchangeCalculator {...this.props} />
+                <RatesChart {...this.props} />
+              </Fragment>
+            :
+              <AuthPage />
+          }
+        </MainPage>
+      );
+    };
 
     return (
       <Router>
         <ErrorBoundary>
           <MuiThemeProvider>
-            <Container_main>
+            <ContainerMain>
               <Header />
                 <Route exact={true} path='/' render={renderInit} />
                 <Route path='/about' component={About} />
-            </Container_main>
+            </ContainerMain>
           </MuiThemeProvider>
         </ErrorBoundary>
       </Router>
@@ -84,6 +89,7 @@ const mapStateToProps = store => ({
     initialDialog: store.appConfig.initialDialog,
     form: store.form,
     currencies: store.currency.currencies,
+    // loggedIn: true
     loggedIn: store.currency.loggedIn
   });
 

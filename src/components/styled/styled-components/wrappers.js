@@ -3,7 +3,7 @@ import { media } from './medias'
 import { css } from 'styled-components'
 import { flex } from './flexes'
 
-export const Container_main = styled.div`
+export const ContainerMain = styled.div`
   width: 100%;
   height: 'auto';
   display: flex;

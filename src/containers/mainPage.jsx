@@ -19,7 +19,7 @@ export default class MainPage extends Component {
    console.log('this.props.children', this.props);
 
    return (
-    <Paper style={styles.mainPaperStyle} zDepth={1} >
+    <Paper style={styles.mainPaperStyle} zDepth={3} >
       { children }
     </Paper>
     )
