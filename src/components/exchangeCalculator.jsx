@@ -11,18 +11,38 @@ export default class ExchangeCalculator extends Component {
     this.state = {
      value: 0,
      selectedCurrencyName: '',
+     usdQuantity: 1,
+     currencyQuantity: 1,
     }
   }
 
   handleSelectedCurrencyChange = (e, ind, value) => {
     this.setState({value})
   }
+
+  calculateChange = () => {
+    if (this.state.usdQuantity !== '' && this.state.currencyQuantity !== '') {
+      const change = this.state.usdQuantity * this.state.currencyQuantity;
+      console.log('calculateChange:', change);
+    }
+  }
+
+  handleChange = (e) => {
+    // console.log('handleChange', e.target);
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+    // this.calculateChange();
+  }
+
+  componentDidUpdate() {
+    this.calculateChange();
+  }
+
   render() {
 
     const { currencies } = this.props;
-
     // console.log('exchangeCalculator render', this.props);
-
     const calculatorStyle = {
       ...styles.mainPaperStyle,
       margin: 0,
@@ -35,7 +55,6 @@ export default class ExchangeCalculator extends Component {
       width: 25
     }
 
-
     let currArr = Object.entries(currencies).map((key,ind)=>{
       return (
         <MenuItem value={ind} primaryText={key[0]} />
@@ -46,13 +65,14 @@ export default class ExchangeCalculator extends Component {
       <Paper style={calculatorStyle}>
         <div>
           <TextField
-          id="tf"
-          defaultValue="1"
+          id="usdQuantity"
+          value={this.state.usdQuantity}
           style={tfStyle}
+          onChange={this.handleChange}
           />
           <SelectField
             value = {0}
-            floatingLabelText = "Currencies"
+            floatingLabelText = "Currency"
             onChange = {this.handleSelectedCurrencyChange}
             menuItemStyle = {{color:'steelblue'}}
             style={{margin:0,width:'auto'}}
@@ -63,9 +83,10 @@ export default class ExchangeCalculator extends Component {
 
         <div>
           <TextField
-          id="tf"
-          defaultValue="1"
+          id="currencyQuantity"
+          value={this.state.currencyQuantity}
           style={tfStyle}
+          onChange={this.handleChange}
           />
           <SelectField
             value = {this.state.value}
