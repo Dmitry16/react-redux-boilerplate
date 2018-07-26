@@ -20,6 +20,11 @@ export function currenciesReducer(state = initialState, action) {
             [action.cur]: action.val
           },
       }
+    case 'LS_REC_INJ':
+      return {
+        ...state,
+        selectedCurrencies: action.payload
+      }
     case 'CURRENCY_REMOVED':
       delete state.selectedCurrencies[action.cur];
       return state;

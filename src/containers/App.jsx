@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
 
 //APIs,Actions
-// import { getFromLocalStorage } from '../api/localStorage';
-// import { lsRecInjection } from '../actions/localStorageActions';
+import { getFromLocalStorage } from '../api/localStorage';
+import { lsRecInjection } from '../actions/localStorageActions';
 // import { fetchData } from '../actions/fetchDataAction';
 import { showInitialDialog } from '../actions/initialDialogActions';
 
@@ -31,16 +31,15 @@ class App extends Component {
     super(props);
   }
 
-  // componentWillMount() {
-  //   let localStorageRec = getFromLocalStorage();
-  //
-  //   if (localStorageRec.length !== 0) {
-  //     console.log('localStorageRec',localStorageRec[localStorageRec.length-1]);
-  //     this.props.dispatch(lsRecInjection(localStorageRec[localStorageRec.length-1]));
-  //     this.props.dispatch(fetchData(...localStorageRec[localStorageRec.length-1]));
-  //   }
-  //   this.props.dispatch(showInitialDialog());
-  // }
+  componentWillMount() {
+    let localStorageRec = getFromLocalStorage();
+
+    if (localStorageRec.length !== 0) {
+      // console.log('componentWillMount localStorageRec:', localStorageRec[localStorageRec.length-1]);
+      this.props.dispatch(lsRecInjection(localStorageRec[localStorageRec.length-1]));
+    }
+    // this.props.dispatch(showInitialDialog());
+  }
 
   render() {
 

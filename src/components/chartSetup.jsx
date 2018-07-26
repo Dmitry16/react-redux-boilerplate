@@ -59,7 +59,7 @@ const ChartSetupHOC = (Component, props) => {
         currArr = Object.entries(currencies).map((key,ind) => {
           if (n === 5 && ind < 5)
             return (
-              <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
+              <Paper key={ind} style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
           else if (this.state.btnLabel === 'chart' && ind < Object.entries(currencies).length)
             return (
@@ -69,7 +69,7 @@ const ChartSetupHOC = (Component, props) => {
             )
           else if (n === Object.entries(currencies).length && ind < Object.entries(currencies).length)
             return (
-              <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
+              <Paper key={ind} style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
         })
       )

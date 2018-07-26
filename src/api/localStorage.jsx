@@ -11,11 +11,11 @@ export const setToLocalStorage = (selectedCurrencies) => {
   let currencies = getFromLocalStorage();
   if(Object.entries(selectedCurrencies).length === 0 ||
   currencies.indexOf(selectedCurrencies) > -1) {
-    console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
-    console.log('false from setToLocalStorage');
+    // console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
+    // console.log('false from setToLocalStorage');
     return false;
   }
-  console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
+  // console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
   currencies.push(selectedCurrencies);
   localStorage.setItem('currencies', JSON.stringify(currencies));
   return true;

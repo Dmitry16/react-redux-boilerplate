@@ -28,21 +28,15 @@ export default class ExchangeCalculator extends Component {
 
   matchCurrency = () => {
     if (Object.keys(this.props.selectedCurrencies).length > 0) {
-
-      console.log('matchCurrency selectedCurrencies', Object.entries(this.props.selectedCurrencies)[this.state.value][1]);
-
+      // console.log('matchCurrency selectedCurrencies', Object.entries(this.props.selectedCurrencies)[this.state.value][1]);
       return Object.entries(this.props.selectedCurrencies)[this.state.value][1]
-
     } else {
-
-      console.log('matchCurrency zzzzz');
-
       return Object.entries(this.props.currencies)[this.state.value][1]
     }
   }
 
   calculateChange = (target) => {
-    console.log('calculateChange', this.matchCurrency());
+    // console.log('calculateChange', this.matchCurrency());
 
     if (this.state.usdQuantity !== '' && this.state.currencyQuantity !== '') {
       const change = this.matchCurrency();
@@ -85,15 +79,12 @@ export default class ExchangeCalculator extends Component {
 
   render() {
     let currencies = {};
-
+    // console.log('exchangeCalculator render', this.state);
     if (Object.keys(this.props.selectedCurrencies).length > 0) {
       currencies = this.props.selectedCurrencies;
     } else {
       currencies = this.props.currencies;
     }
-
-    // console.log('exchangeCalculator render', this.state);
-
     const calculatorStyle = {
       ...styles.mainPaperStyle,
       margin: 0,
@@ -108,7 +99,7 @@ export default class ExchangeCalculator extends Component {
 
     let currArr = Object.entries(currencies).map((key,ind) => {
       return (
-        <MenuItem value={ind} primaryText={key[0]} />
+        <MenuItem key={ind} value={ind} primaryText={key[0]} />
       )
     })
 
