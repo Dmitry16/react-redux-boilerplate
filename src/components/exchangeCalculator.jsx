@@ -10,39 +10,57 @@ export default class ExchangeCalculator extends Component {
     super(props)
     this.state = {
      value: 0,
-     selectedCurrencyName: '',
+     selectedCurrencyName: Object.keys(this.props.currencies)[0],
      usdQuantity: 1,
      currencyQuantity: 1,
     }
   }
 
   handleSelectedCurrencyChange = (e, ind, value) => {
-    this.setState({value})
+    // console.log('handleSelectedCurrencyChange',
+      // Object.keys(this.props.currencies)[value]);
+    this.setState({
+      value: value,
+      selectedCurrencyName: Object.keys(this.props.currencies)[value]
+    })
   }
 
-  calculateChange = () => {
+  calculateChange = (target) => {
     if (this.state.usdQuantity !== '' && this.state.currencyQuantity !== '') {
       const change = this.state.usdQuantity * this.state.currencyQuantity;
-      console.log('calculateChange:', change);
+      if (target && target === 'usdQuantity') {
+        this.setState({
+          currencyQuantity: this.state.usdQuantity *
+            Object.entries(this.props.currencies)[this.state.value][1]
+          // change: change
+        });
+      }
+      console.log('calculateChange:', Object.entries(this.props.currencies)[this.state.value][1]);
     }
   }
 
   handleChange = (e) => {
     // console.log('handleChange', e.target);
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
+      target: e.target.id
     });
-    // this.calculateChange();
   }
 
-  componentDidUpdate() {
-    this.calculateChange();
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate', this.state[prevState.target]);
+    //checking if the quantity of currency changed
+    if (prevState[prevState.target] !== this.state[prevState.target]) {
+      this.calculateChange(this.state.target);
+    }
   }
 
   render() {
 
     const { currencies } = this.props;
-    // console.log('exchangeCalculator render', this.props);
+
+    console.log('exchangeCalculator render', this.state);
+
     const calculatorStyle = {
       ...styles.mainPaperStyle,
       margin: 0,
@@ -55,7 +73,7 @@ export default class ExchangeCalculator extends Component {
       width: 25
     }
 
-    let currArr = Object.entries(currencies).map((key,ind)=>{
+    let currArr = Object.entries(currencies).map((key,ind) => {
       return (
         <MenuItem value={ind} primaryText={key[0]} />
       )

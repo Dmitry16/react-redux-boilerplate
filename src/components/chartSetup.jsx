@@ -90,7 +90,7 @@ const ChartSetupHOC = (Component, props) => {
 
     render() {
 
-      console.log('ChartSetupHOC state, props:', this.state, this.props);
+      // console.log('ChartSetupHOC state, props:', this.state, this.props);
 
       return (
         <Component
