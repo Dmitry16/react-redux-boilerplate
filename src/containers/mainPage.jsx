@@ -16,7 +16,7 @@ export default class MainPage extends Component {
      React.cloneElement(child, this.props)
    ))
 
-   console.log('this.props.children', this.props);
+   // console.log('this.props.children', this.props);
 
    return (
     <Paper style={styles.mainPaperStyle} zDepth={3} >

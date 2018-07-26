@@ -13,16 +13,15 @@ const chartStyle = {
 class RatesChart extends Component {
   constructor(props) {
     super(props)
-    // this.state = {
-    //   chartSetup: false,
-    //   btnLabel: 'setup'
-    // }
+    this.state = {
+      chartSetup: false,
+      btnLabel: 'setup'
+    }
   }
 
   render() {
 
     console.log('RatesChart statezz, propzz:', this.state, this.props);
-    // { this.props.currArr ? this.props.currArr : currArr }
      return(
       <Paper style={chartStyle}>
         <RaisedButton

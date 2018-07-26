@@ -12,10 +12,10 @@ const brickStyle = {
 
 const insertElement = (element) => (elementToInsert) => {
   return (
-    <div style={{border:'3px solid blue'}}>
+    <Paper style={{margin: '3px'}}>
       { elementToInsert }
       { element }
-    </div>
+    </Paper>
   )
 }
 
@@ -32,23 +32,41 @@ const ChartSetupHOC = (Component, props) => {
     clickHandler = () => {
       this.setState({
         // chartSetup: true,
-        btnLabel: this.state.bugtnLabel==='chart' ? 'setup' : 'chart'
+        btnLabel: this.state.btnLabel==='chart' ? 'setup' : 'chart'
       })
     }
 
+    checkIfMarked = cur => cur in this.props.selectedCurrencies;
+
     makeCurrArr = (n = Object.entries(this.props.currencies).length, style) => {
-      let currArr
+      // console.log('makeCurrArr n:', n);
+      let currArr, currencies, selectedCurrencies;
+      selectedCurrencies = Object.keys(this.props.selectedCurrencies);
       // let elementToInsert = <Checkbox />
+      if (selectedCurrencies.length > 0 && this.state.btnLabel === 'setup') {
+
+        currencies = this.props.selectedCurrencies;
+
+      } else {
+
+        currencies = this.props.currencies;
+
+      }
       return (
-        currArr = Object.entries(this.props.currencies).map((key,ind)=>{
+        currArr = Object.entries(currencies).map((key,ind) => {
           if (n === 5 && ind < 5)
             return (
               <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
-          else if (n !== 5 )
+          else if (this.state.btnLabel === 'chart' && ind < Object.entries(currencies).length)
             return (
               insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
-                (<Checkbox cur={key[0]} val={key[1]} dispatch={this.props.dispatch}/>)
+                (<Checkbox cur={key[0]} val={key[1]} dispatch={this.props.dispatch}
+                  marked={this.checkIfMarked(key[0])}/>)
+            )
+          else if (n === Object.entries(currencies).length && ind < Object.entries(currencies).length)
+            return (
+              <Paper style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
         })
       )
@@ -58,12 +76,16 @@ const ChartSetupHOC = (Component, props) => {
       if (this.state.btnLabel==='chart') {
       // console.log('propzz in renderCurrencies', this.props);
         return (
+            this.makeCurrArr(Object.entries(this.props.currencies).length, brickStyle)
+        );
+      } else if (Object.keys(this.props.selectedCurrencies).length > 0) {
 
-            this.makeCurrArr()
+        return this.makeCurrArr(Object.keys(this.props.selectedCurrencies).length, brickStyle);
 
-        )
-      } else
-        return this.makeCurrArr(5, brickStyle)
+      } else {
+
+        return this.makeCurrArr(5, brickStyle);
+      }
     }
 
     render() {

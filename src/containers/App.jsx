@@ -85,12 +85,12 @@ class App extends Component {
 // }
 
 const mapStateToProps = store => ({
-    searchResultsBlockVisible: store.searchResults.visible,
-    initialDialog: store.appConfig.initialDialog,
+    // searchResultsBlockVisible: store.searchResults.visible,
+    // initialDialog: store.appConfig.initialDialog,
     form: store.form,
     currencies: store.currency.currencies,
-    // loggedIn: true
-    loggedIn: store.currency.loggedIn
+    loggedIn: store.currency.loggedIn,
+    selectedCurrencies: store.currency.selectedCurrencies
   });
 
 export default connect(mapStateToProps)(App)

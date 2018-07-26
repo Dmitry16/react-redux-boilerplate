@@ -5,7 +5,7 @@ export class Checkbox extends Component {
   constructor(props) {
     super(props);
      this.state = {
-       checked: false
+       checked: this.props.marked
      }
   }
   handleChange = () => {

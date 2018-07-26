@@ -5,7 +5,7 @@ import request from 'superagent';
 //emulated API call result
 const result = {
   rates: {
-    AAA
+    AED
     :
     3.673097,
     AFN
@@ -56,7 +56,7 @@ function getCurrency(appKey) {
 
 function* callGetCurrency({appKey, resolve, reject}) {
   const result = yield call(getCurrency, appKey);
-  console.log('saggga', appKey, result);
+  // console.log('saggga', appKey, result);
   if (result) {
     yield put({type: "CURRENCIES_FETCHED", payload: result.rates});
     yield call(resolve);

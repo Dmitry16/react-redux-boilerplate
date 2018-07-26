@@ -21,7 +21,7 @@ export default class ExchangeCalculator extends Component {
 
     const { currencies } = this.props;
 
-    console.log('exchangeCalculator render', this.props);
+    // console.log('exchangeCalculator render', this.props);
 
     const calculatorStyle = {
       ...styles.mainPaperStyle,
