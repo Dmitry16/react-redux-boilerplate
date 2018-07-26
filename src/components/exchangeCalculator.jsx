@@ -13,6 +13,7 @@ export default class ExchangeCalculator extends Component {
      selectedCurrencyName: Object.keys(this.props.currencies)[0],
      usdQuantity: 1,
      currencyQuantity: 1,
+     target: 'usdQuantity'
     }
   }
 
@@ -53,6 +54,14 @@ export default class ExchangeCalculator extends Component {
     if (prevState[prevState.target] !== this.state[prevState.target]) {
       this.calculateChange(this.state.target);
     }
+    if (prevState.selectedCurrencyName !== this.state.selectedCurrencyName) {
+      this.calculateChange(this.state.target);
+    }
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount', this.state.target);
+    this.calculateChange(this.state.target);
   }
 
   render() {
@@ -108,7 +117,7 @@ export default class ExchangeCalculator extends Component {
           />
           <SelectField
             value = {this.state.value}
-            floatingLabelText = "Currencies"
+            floatingLabelText = "Currency"
             onChange = {this.handleSelectedCurrencyChange}
             menuItemStyle = {{color:'steelblue'}}
             style={{width:'auto'}}
