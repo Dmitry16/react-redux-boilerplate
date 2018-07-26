@@ -1,9 +1,8 @@
-import React, { Component, propTypes } from 'react'
-import Paper from 'material-ui/Paper'
-import * as styles from '../css/mainCSS'
-// import ChartForm from './chartForm'
-import { Checkbox } from './checkBox'
-
+import React, { Component, propTypes } from 'react';
+import Paper from 'material-ui/Paper';
+import * as styles from '../css/mainCSS';
+import { Checkbox } from './checkBox';
+import { setToLocalStorage } from '../api/localStorage';
 
 const brickStyle = {
   ...styles.mainPaperStyle,
@@ -30,9 +29,13 @@ const ChartSetupHOC = (Component, props) => {
     }
 
     clickHandler = () => {
+      if (this.state.btnLabel === 'chart' &&
+      Object.entries(this.props.selectedCurrencies).length > 0) {
+        setToLocalStorage(this.props.selectedCurrencies);
+      }
       this.setState({
         // chartSetup: true,
-        btnLabel: this.state.btnLabel==='chart' ? 'setup' : 'chart'
+        btnLabel: this.state.btnLabel === 'chart' ? 'setup' : 'chart'
       })
     }
 
@@ -74,7 +77,7 @@ const ChartSetupHOC = (Component, props) => {
 
     renderCurrencies = () => {
       if (this.state.btnLabel==='chart') {
-      console.log('propzz in renderCurrencies', this.props);
+      // console.log('propzz in renderCurrencies', this.props);
         return (
             this.makeCurrArr(Object.entries(this.props.currencies).length, brickStyle)
         );

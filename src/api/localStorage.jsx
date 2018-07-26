@@ -1,29 +1,30 @@
 import React from 'react';
 
-export const validateInput = (submittedText) => {
-  if(submittedText !=="") {
-    setToLocalStorage(submittedText);
+export const validateInput = (selectedCurrencies) => {
+  if(selectedCurrencies !== '') {
+    setToLocalStorage(selectedCurrencies);
     return true;
   }
 }
 
-export const setToLocalStorage = (submittedText) => {
-  let trips = getFromLocalStorage();
-  if(!submittedText || trips.indexOf(submittedText)>-1) {
-    console.log('submittedText in setToLocalStorage', submittedText);
+export const setToLocalStorage = (selectedCurrencies) => {
+  let currencies = getFromLocalStorage();
+  if(Object.entries(selectedCurrencies).length === 0 ||
+  currencies.indexOf(selectedCurrencies) > -1) {
+    console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
     console.log('false from setToLocalStorage');
     return false;
   }
-  console.log('submittedText in setToLocalStorage', submittedText);
-  trips.push(submittedText);
-  localStorage.setItem('trips', JSON.stringify(trips));
+  console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
+  currencies.push(selectedCurrencies);
+  localStorage.setItem('currencies', JSON.stringify(currencies));
   return true;
 }
 
 export const getFromLocalStorage = () => {
-  let trips = localStorage.getItem("trips");
-  if (trips) {
-    return JSON.parse(trips);
+  let currencies = localStorage.getItem('currencies');
+  if (currencies) {
+    return JSON.parse(currencies);
   } else {
     return [];
   }
