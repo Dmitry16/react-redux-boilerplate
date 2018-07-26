@@ -45,7 +45,7 @@ class App extends Component {
 
   const  { loggedIn, form } = this.props;
 
-    // console.log('App render this.props', this.props)
+    console.log('App render this.props', this.props)
 
     const renderInit = () => {
       return (
@@ -88,6 +88,7 @@ const mapStateToProps = store => ({
     // initialDialog: store.appConfig.initialDialog,
     form: store.form,
     currencies: store.currency.currencies,
+    history: store.currency.history,
     loggedIn: store.currency.loggedIn,
     selectedCurrencies: store.currency.selectedCurrencies
   });
