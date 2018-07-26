@@ -74,7 +74,7 @@ const ChartSetupHOC = (Component, props) => {
 
     renderCurrencies = () => {
       if (this.state.btnLabel==='chart') {
-      // console.log('propzz in renderCurrencies', this.props);
+      console.log('propzz in renderCurrencies', this.props);
         return (
             this.makeCurrArr(Object.entries(this.props.currencies).length, brickStyle)
         );

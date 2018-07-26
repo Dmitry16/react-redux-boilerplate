@@ -21,7 +21,7 @@ class RatesChart extends Component {
 
   render() {
 
-    // console.log('RatesChart statezz, propzz:', this.state, this.props);
+    console.log('RatesChart statezz, propzz:', this.state, this.props);
      return(
       <Paper style={chartStyle}>
         <RaisedButton

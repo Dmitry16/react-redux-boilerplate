@@ -24,8 +24,7 @@ export class Checkbox extends Component {
 
   render() {
 
-    console.log('checkbox propzz', this.props);
-
+    // console.log('checkbox propzz', this.props);
     return (
         <input
           type="checkbox"

@@ -26,17 +26,33 @@ export default class ExchangeCalculator extends Component {
     })
   }
 
+  matchCurrency = () => {
+    if (Object.keys(this.props.selectedCurrencies).length > 0) {
+
+      console.log('matchCurrency selectedCurrencies', Object.entries(this.props.selectedCurrencies)[this.state.value][1]);
+
+      return Object.entries(this.props.selectedCurrencies)[this.state.value][1]
+
+    } else {
+
+      console.log('matchCurrency zzzzz');
+
+      return Object.entries(this.props.currencies)[this.state.value][1]
+    }
+  }
+
   calculateChange = (target) => {
+    console.log('calculateChange', this.matchCurrency());
+
     if (this.state.usdQuantity !== '' && this.state.currencyQuantity !== '') {
-      const change = this.state.usdQuantity * this.state.currencyQuantity;
+      const change = this.matchCurrency();
       if (target && target === 'usdQuantity') {
         this.setState({
-          currencyQuantity: this.state.usdQuantity *
-            Object.entries(this.props.currencies)[this.state.value][1]
+          currencyQuantity: this.state.usdQuantity * change
           // change: change
         });
       }
-      console.log('calculateChange:', Object.entries(this.props.currencies)[this.state.value][1]);
+      // console.log('calculateChange:', Object.entries(this.props.currencies)[this.state.value][1]);
     }
   }
 
@@ -49,7 +65,7 @@ export default class ExchangeCalculator extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', this.state[prevState.target]);
+    // console.log('componentDidUpdate', this.state[prevState.target]);
     //checking if the quantity of currency changed
     if (prevState[prevState.target] !== this.state[prevState.target]) {
       this.calculateChange(this.state.target);
@@ -57,18 +73,26 @@ export default class ExchangeCalculator extends Component {
     if (prevState.selectedCurrencyName !== this.state.selectedCurrencyName) {
       this.calculateChange(this.state.target);
     }
+    if (prevProps.selectedCurrencies !== this.props.selectedCurrencies) {
+      this.calculateChange(this.state.target);
+    }
   }
 
   componentDidMount() {
-    console.log('componentDidMount', this.state.target);
+    // console.log('componentDidMount', this.state.target);
     this.calculateChange(this.state.target);
   }
 
   render() {
+    let currencies = {};
 
-    const { currencies } = this.props;
+    if (Object.keys(this.props.selectedCurrencies).length > 0) {
+      currencies = this.props.selectedCurrencies;
+    } else {
+      currencies = this.props.currencies;
+    }
 
-    console.log('exchangeCalculator render', this.state);
+    // console.log('exchangeCalculator render', this.state);
 
     const calculatorStyle = {
       ...styles.mainPaperStyle,
@@ -78,8 +102,8 @@ export default class ExchangeCalculator extends Component {
     }
     const tfStyle = {
       margin: 20,
-      marginBottom: 0,
-      width: 25
+      marginBottom: 10,
+      width: 55
     }
 
     let currArr = Object.entries(currencies).map((key,ind) => {

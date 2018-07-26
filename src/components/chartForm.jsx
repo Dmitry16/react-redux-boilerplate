@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 // import { Checkbox } from './checkBox'
-
 // import { Input, Button, Message } from 'semantic-ui-react'
 
 const renderCheckbox = props => {
