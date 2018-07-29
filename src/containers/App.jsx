@@ -4,15 +4,16 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
-
+//Redux-Selectors
+import CurrenciesHistory from '../selectors/currenciesHistorySelector';
 //APIs,Actions
 import { getFromLocalStorage } from '../api/localStorage';
 import { lsRecInjection } from '../actions/localStorageActions';
 // import { fetchData } from '../actions/fetchDataAction';
 import { showInitialDialog } from '../actions/initialDialogActions';
-
 //Assets
 import '../css/App.css';
+import '../../node_modules/react-vis/dist/style.css';
 //Components
 import ErrorBoundary from '../components/errorBoundary';
 import { ContainerMain } from '../components/styled/styled-components/wrappers';
@@ -22,7 +23,7 @@ import About from '../components/about';
 import { Header, Footer } from '../components/header';
 import ExchangeCalculator from '../components/exchangeCalculator';
 import RatesChart from '../components/ratesChart';
-
+import InitCurrenciesChart from '../components/charts/initCurrenciesChart';
 //Material-UI Components
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -55,6 +56,7 @@ class App extends Component {
               <Fragment>
                 <ExchangeCalculator {...this.props} />
                 <RatesChart {...this.props} />
+                <InitCurrenciesChart {...this.props}/>
               </Fragment>
             :
               <AuthPage />
@@ -83,12 +85,12 @@ class App extends Component {
 //   return bindActionCreators(actionCreators, dispatch);
 // }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store, props) => ({
     // searchResultsBlockVisible: store.searchResults.visible,
     // initialDialog: store.appConfig.initialDialog,
     form: store.form,
     currencies: store.currency.currencies,
-    history: store.currency.history,
+    history: CurrenciesHistory(store, props),
     loggedIn: store.currency.loggedIn,
     selectedCurrencies: store.currency.selectedCurrencies
   });

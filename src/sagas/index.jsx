@@ -2,44 +2,6 @@ import { takeEvery } from 'redux-saga';
 import { fork, call, put } from 'redux-saga/effects';
 import request from 'superagent';
 
-//emulated API call result
-// const result = {
-//   rates: {
-//     AED
-//     :
-//     3.673097,
-//     AFN
-//     :
-//     69.375,
-//     ALL
-//     :
-//     105.2,
-//     AMD
-//     :
-//     480,
-//     ANG
-//     :
-//     1.783141,
-//     AOA
-//     :
-//     214.584,
-//     ARS
-//     :
-//     20.1755,
-//     AUD
-//     :
-//     1.299545,
-//     AWG
-//     :
-//     1.784998,
-//     AZN
-//     :
-//     1.7025,
-//     BAM
-//     :
-//     1.582704
-//   }
-// };
 
 function getCurrency(appKey) {
   // console.log('getCurrency Saga', appKey);
@@ -55,7 +17,7 @@ function getCurrency(appKey) {
 function getHistory2017(appKey) {
   const url = `https://openexchangerates.org/api/historical/2017-02-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU
+  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
   &prettyprint=0`;
 
   return request
@@ -68,7 +30,7 @@ function getHistory2017(appKey) {
 function getHistory2016(appKey) {
   const url = `https://openexchangerates.org/api/historical/2016-02-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU
+  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
   &prettyprint=0`;
 
   return request
@@ -81,7 +43,7 @@ function getHistory2016(appKey) {
 function getHistory2015(appKey) {
   const url = `https://openexchangerates.org/api/historical/2015-02-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU
+  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
   &prettyprint=0`;
 
   return request
@@ -94,7 +56,7 @@ function getHistory2015(appKey) {
 function getHistory2014(appKey) {
   const url = `https://openexchangerates.org/api/historical/2014-02-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU
+  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
   &prettyprint=0`;
 
   return request
@@ -107,7 +69,7 @@ function getHistory2014(appKey) {
 function getHistory2013(appKey) {
   const url = `https://openexchangerates.org/api/historical/2013-02-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU
+  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
   &prettyprint=0`;
 
   return request
@@ -119,16 +81,15 @@ function getHistory2013(appKey) {
 }
 
 function* callGetCurrency({appKey, resolve, reject}) {
-  const result = yield call(getCurrency, appKey);
+  const currencies2018 = yield call(getCurrency, appKey);
   const history2017 = yield call(getHistory2017, appKey);
   const history2016 = yield call(getHistory2016, appKey);
   const history2015 = yield call(getHistory2015, appKey);
   const history2014 = yield call(getHistory2014, appKey);
   const history2013 = yield call(getHistory2013, appKey);
   // console.log('saggga', appKey, result);
-  if (result) {
-    yield put({type: "CURRENCIES_FETCHED", payload: result.rates});
-    yield call(resolve);
+  if (currencies2018) {
+    yield put({type: "CURRENCIES_FETCHED", payload: currencies2018.rates});
   } else {
     yield call(reject, {appKey: 'Access Erorr. App Key is not valid.'});
   }
@@ -146,6 +107,9 @@ function* callGetCurrency({appKey, resolve, reject}) {
   }
   if (history2013) {
     yield put({type: "HISTORY2013_FETCHED", payload: history2013.rates});
+  }
+  if (currencies2018 && history2017 && history2016 && history2015 && history2014 && history2013) {
+    yield call(resolve);
   }
 }
 

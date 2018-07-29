@@ -77,7 +77,7 @@ const ChartSetupHOC = (Component, props) => {
 
     renderCurrencies = () => {
       if (this.state.btnLabel==='chart') {
-      // console.log('propzz in renderCurrencies', this.props);
+      // console.log('propzz in renderCurrencies', Object.entries(this.props.currencies));
         return (
             this.makeCurrArr(Object.entries(this.props.currencies).length, brickStyle)
         );
@@ -94,6 +94,18 @@ const ChartSetupHOC = (Component, props) => {
     render() {
 
       // console.log('ChartSetupHOC state, props:', this.state, this.props);
+
+      const currencies = () => {
+        const defaultCurrencies = ['BTC','UAH','RUB','EUR','XAU','XAG','XPT','XPD'];
+        const reduced = Object.entries(this.props.currencies).filter(cur =>
+          defaultCurrencies.includes(cur[0])).reduce((acc, cur, i) => {
+            acc[cur[0]] = cur[1];
+            return acc;
+          }, {});
+          return {...reduced,...defaultCurrencies};
+      };
+
+      // console.log('renderrrrrrr', this.props.currencies);
 
       return (
         <Component

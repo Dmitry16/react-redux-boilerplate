@@ -20,7 +20,7 @@ const renderTextField = ({
   />
 )
 
-const submit = ({ appKey }, dispatch) => {
+const submit = ({ appKey }, dispatch, props) => {
   return new Promise((resolve, reject) => {
     dispatch({
       type: 'AUTH',
@@ -29,13 +29,7 @@ const submit = ({ appKey }, dispatch) => {
       reject
     })
   })
-  // .then((resolve, appKey) => {
-  //   console.log('aaaaaa');
-  //   if (appKey === 'qq') {
-  //     resolve('urrrra!');
-  //     console.log('zzzzz');
-  //   }
-  // })
+  // .then(console.log('submit:::', props))
   .catch((error) => {
     throw new SubmissionError(error);
   })
