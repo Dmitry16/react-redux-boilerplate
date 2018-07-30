@@ -21,36 +21,20 @@ const currencies = (store, props) => {
   return defaultCurrencies;
 };
 
-const history2017 = store => store.currency.history2017;
-const history2016 = store => store.currency.history2016;
-const history2015 = store => store.currency.history2015;
-const history2014 = store => store.currency.history2014;
-const history2013 = store => store.currency.history2013;
+const history = store => store.currency.history;
 
 const currenciesHistory = (
   filteredCurrencies,
-  hist2017,
-  hist2016,
-  hist2015,
-  hist2014,
-  hist2013
+  allHistory
 ) => {
   const arr = [];
   arr.push(filteredCurrencies);
-  arr.push(hist2017);
-  arr.push(hist2016);
-  arr.push(hist2015);
-  arr.push(hist2014);
-  arr.push(hist2013);
+  arr.push(allHistory);
   return arr;
 };
 
 export default createSelector(
   currencies,
-  history2017,
-  history2016,
-  history2015,
-  history2014,
-  history2013,
+  history,
   currenciesHistory
 );

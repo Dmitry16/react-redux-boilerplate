@@ -46,7 +46,7 @@ class App extends Component {
 
   const  { loggedIn, form } = this.props;
 
-    console.log('App render this.props', this.props)
+    // console.log('App render this.props', this.props)
 
     const renderInit = () => {
       return (

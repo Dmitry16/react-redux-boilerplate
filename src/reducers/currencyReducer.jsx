@@ -28,30 +28,10 @@ export function currenciesReducer(state = initialState, action) {
         ...state,
         selectedCurrencies: action.payload
       }
-    case 'HISTORY2017_FETCHED':
+    case 'HISTORY_FETCHED':
       return {
         ...state,
-        history2017: action.payload,
-      }
-    case 'HISTORY2016_FETCHED':
-      return {
-        ...state,
-        history2016: action.payload,
-      }
-    case 'HISTORY2015_FETCHED':
-      return {
-        ...state,
-        history2015: action.payload,
-      }
-    case 'HISTORY2014_FETCHED':
-      return {
-        ...state,
-        history2014: action.payload,
-      }
-    case 'HISTORY2013_FETCHED':
-      return {
-        ...state,
-        history2013: action.payload,
+        history: action.payload,
       }
     default:
       return state;
