@@ -24,17 +24,17 @@ export default class InitCurrenciesChart extends Component {
   render() {
 
     // console.log('renderrrr1', this.makeDataForChart('UAH'));
-    // const data = Object.entries(this.props.history).reduce((acc, cur, i) => {
-    //   // console.log('reduuuuce', Object.keys(cur));
-    //   // let n = cur['UAH'];
-    //   acc[i] = cur;
-    //   return acc;
-    // }, []);
+    if (this.props.history) {
+      const data = Object.entries(this.props.history).reduce((acc, cur, i) => {
+        console.log('reduuuuce', cur);
+        // let n = cur['UAH'];
+        acc[cur] = cur['UAH'];
+        return acc;
+      }, []);
+    }
     // const data = this.props.history.map(key => Object.keys(key));
 
-    console.log('renderrrrr2', this.props.history[0]['UAH']);
-    // console.log('renderrrrr3', this.props.history[1]['UAH']);
-    // console.log('renderrrrr4', this.props.history[2]['UAH']);
+    // console.log('renderrrrr2', data);
 
     return (
       <XYPlot

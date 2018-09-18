@@ -21,15 +21,26 @@ const currencies = (store, props) => {
   return defaultCurrencies;
 };
 
-const history = store => store.currency.history;
+const history = store => {
+  if (store.currency.history) {
+    const reduced = store.currency.history.reduce((acc, cur, ind) => {
+      acc[ind] = cur['rates'];
+      return acc;
+    }, {});
+    console.log('history reduced:', reduced);
+    return reduced;
+  }
+};
 
 const currenciesHistory = (
   filteredCurrencies,
   allHistory
 ) => {
-  const arr = [];
-  arr.push(filteredCurrencies);
-  arr.push(allHistory);
+  let arr = [];
+  if (filteredCurrencies, allHistory) {
+    arr = {...filteredCurrencies, ...allHistory};
+  // arr.push(allHistory);
+  }
   return arr;
 };
 

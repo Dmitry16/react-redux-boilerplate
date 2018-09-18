@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const UAH = [
   {x: 1, y: 8.115192},

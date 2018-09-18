@@ -47,7 +47,7 @@ function* callGetHistory({appKey, resolve, reject}) {
     // console.log('callGetHistory', year);
     return call(getHistory, appKey, year)
   }));
-  console.log('saggga', history);
+  // console.log('saggga', history);
   if (history) {
     yield put({type: "HISTORY_FETCHED", payload: history});
   }
