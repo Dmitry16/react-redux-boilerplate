@@ -1,0 +1,38 @@
+{
+  "name": "curts",
+  "version": "1.0.0",
+  "description": "React + Redux + Redux Sagas + TypeScript + MaterialDesign + Styled Components",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "webpack": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmitry16/curts.git"
+  },
+  "keywords": [
+    "curts"
+  ],
+  "author": "Dmytro Davydov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dmitry16/curts/issues"
+  },
+  "homepage": "https://github.com/Dmitry16/curts#readme",
+  "dependencies": {
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "webpack": "^4.19.1"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.0.3",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  }
+}
