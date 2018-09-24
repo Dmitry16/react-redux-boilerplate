@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import Code from 'material-ui/svg-icons/action/code';
 
 
-export default class MenuDrawer extends React.Component {
+export default class MenuDrawer extends React.Component<{}, {open}> {
 
   constructor(props) {
     super(props);

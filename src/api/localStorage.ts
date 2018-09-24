@@ -9,7 +9,7 @@ export const validateInput = (selectedCurrencies) => {
 
 export const setToLocalStorage = (selectedCurrencies) => {
   let currencies = getFromLocalStorage();
-  if(Object.entries(selectedCurrencies).length === 0 ||
+  if((Object as any).entries(selectedCurrencies).length === 0 ||
   currencies.indexOf(selectedCurrencies) > -1) {
     // console.log('selectedCurrencies in setToLocalStorage', selectedCurrencies);
     // console.log('false from setToLocalStorage');

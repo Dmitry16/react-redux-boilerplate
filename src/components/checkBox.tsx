@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { addCurrency, removeCurrency } from '../actions/currenciesActions';
 
-export class Checkbox extends Component {
+interface CheckboxProps {
+  marked: boolean,
+  cur: any,
+  val: any,
+  dispatch: any
+}
+
+export class Checkbox extends Component<CheckboxProps, {checked: boolean}> {
   constructor(props) {
     super(props);
      this.state = {
@@ -13,10 +20,10 @@ export class Checkbox extends Component {
     this.setState({
       checked: !this.state.checked
     });
-    // console.log('kukuuuuu!', this.refs.checkBox.checked);
-    if (this.refs.checkBox.checked)
+    const { checkBox } = this.refs;
+    if ((checkBox as any).checked)
       dispatch(addCurrency(cur, val));
-    if (!this.refs.checkBox.checked) {
+    if (!(checkBox as any).checked) {
       dispatch(removeCurrency(cur, val));
       // console.log(this.props.cur);
     }

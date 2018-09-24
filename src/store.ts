@@ -9,10 +9,10 @@ import rootSaga from './sagas';
 const sagaMiddleware = createSagaMiddlewear();
 
 const store = createStore(
-  reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  reducer,  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga as any);
 
 export default store;

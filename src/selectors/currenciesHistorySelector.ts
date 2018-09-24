@@ -1,7 +1,7 @@
 // import React from 'react';
 import { createSelector } from 'reselect';
 
-const currencies = (store, props) => {
+const currencies = (store) => {
   const defaultCurrencies = {
     'BTC': 0.000127759842,
     'EUR': 0.859194,

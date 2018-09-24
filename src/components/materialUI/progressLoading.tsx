@@ -26,7 +26,7 @@ const getLeft = () => {
 }
 
 const ProgressLoading = (props) => (
-  <div style={style.container}>
+  <div style={(style as any).container}>
     <RefreshIndicator
       size={100}
       left={getLeft()}

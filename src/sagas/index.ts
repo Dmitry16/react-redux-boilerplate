@@ -1,6 +1,8 @@
 import { takeEvery } from 'redux-saga';
-import { fork, call, put, all } from 'redux-saga/effects';
+import { fork, call, put, all, select } from 'redux-saga/effects';
 import request from 'superagent';
+
+import SelectedCurrencies from '../selectors/selectedCurrencies';
 
 
 function getCurrency(appKey) {
@@ -15,9 +17,8 @@ function getCurrency(appKey) {
 }
 
 
-function* callGetCurrency({appKey, resolve, reject}) {
+function* callGetCurrency({appKey, resolve, reject}) {  
   const currencies2018 = yield call(getCurrency, appKey);
-  // console.log('saggga', appKey, result);
   if (currencies2018) {
     yield put({type: "CURRENCIES_FETCHED", payload: currencies2018.rates});
     yield call(resolve);
@@ -26,11 +27,10 @@ function* callGetCurrency({appKey, resolve, reject}) {
   }
 }
 
-function getHistory(appKey, year = 2017) {
-  // console.log('getHistory:::', appKey, year);
-  const url = `https://openexchangerates.org/api/historical/${year}-02-16.json?app_id=${appKey}
+function getHistory(appKey, year = 2018, selectedCurrencies) {
+  const url = `https://openexchangerates.org/api/historical/${year}-09-16.json?app_id=${appKey}
   &show_alternative=1
-  &symbols=BTC,UAH,RUB,EUR,XAU,XAG,XPT,XPD
+  &symbols=${selectedCurrencies},
   &prettyprint=0`;
 
   return request
@@ -42,10 +42,13 @@ function getHistory(appKey, year = 2017) {
 }
 
 function* callGetHistory({appKey, resolve, reject}) {
-  const years = [2017, 2016, 2015, 2014, 2013];
+  const years = [2018, 2017, 2016, 2015, 2014, 2013];
+  const selectedCurrencies = (Object.keys(yield select(SelectedCurrencies)).toString());
+
+  console.log('callGetHistory', selectedCurrencies);
+
   const history = yield all(years.map(year => {
-    // console.log('callGetHistory', year);
-    return call(getHistory, appKey, year)
+    return call(getHistory, appKey, year, selectedCurrencies)
   }));
   // console.log('saggga', history);
   if (history) {
@@ -54,14 +57,15 @@ function* callGetHistory({appKey, resolve, reject}) {
 }
 
 function* getCurrencySaga() {
-  yield* takeEvery("AUTH", callGetCurrency);
+  yield* takeEvery("AUTH" as any, callGetCurrency);
 }
 
 function* getHistorySaga() {
-  yield* takeEvery("AUTH", callGetHistory);
+  yield* takeEvery("AUTH" as any, callGetHistory);
 }
 
-export default function* rootSaga() {
+export default function* rootSaga(selCur) {
+  
   yield all([
     fork(getCurrencySaga),
     fork(getHistorySaga)

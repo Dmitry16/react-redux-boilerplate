@@ -33,7 +33,7 @@ const ChartForm = props => {
       <div>
         <Field
           name="checkbox"
-          component={ReduxCheckbox}
+          component={renderCheckbox}
           onChange={ console.log('CurrencyWithCheckBox', props.CurrencyWithCheckBox) }
         />
       </div>

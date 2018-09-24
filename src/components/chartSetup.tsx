@@ -1,4 +1,4 @@
-import React, { Component, propTypes } from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
 import * as styles from '../css/mainCSS';
 import { Checkbox } from './checkBox';
@@ -18,9 +18,9 @@ const insertElement = (element) => (elementToInsert) => {
   )
 }
 
-const ChartSetupHOC = (Component, props) => {
+const ChartSetupHOC = (Component): any => {
 
-  return class ChartSetup extends Component {
+  return class ChartSetup extends Component<{}, {}> {
     constructor(props) {
       super(props)
       // this.state = {
@@ -30,7 +30,7 @@ const ChartSetupHOC = (Component, props) => {
 
     clickHandler = () => {
       if (this.state.btnLabel === 'chart' &&
-      Object.entries(this.props.selectedCurrencies).length > 0) {
+      (Object as any).entries(this.props.selectedCurrencies).length > 0) {
         setToLocalStorage(this.props.selectedCurrencies);
       }
       this.setState({
@@ -41,7 +41,7 @@ const ChartSetupHOC = (Component, props) => {
 
     checkIfMarked = cur => cur in this.props.selectedCurrencies;
 
-    makeCurrArr = (n = Object.entries(this.props.currencies).length, style) => {
+    makeCurrArr = (n = (Object as any).entries(this.props.currencies).length, style) => {
       // console.log('makeCurrArr n:', n);
       let currArr, currencies, selectedCurrencies;
       selectedCurrencies = Object.keys(this.props.selectedCurrencies);
@@ -56,18 +56,18 @@ const ChartSetupHOC = (Component, props) => {
 
       }
       return (
-        currArr = Object.entries(currencies).map((key,ind) => {
+        currArr = (Object as any).entries(currencies).map((key,ind) => {
           if (n === 5 && ind < 5)
             return (
               <Paper key={ind} style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
-          else if (this.state.btnLabel === 'chart' && ind < Object.entries(currencies).length)
+          else if (this.state.btnLabel === 'chart' && ind < (Object as any).entries(currencies).length)
             return (
               insertElement(<Paper style={style}>{`${key[0]}: ${key[1]}`}</Paper>)
                 (<Checkbox cur={key[0]} val={key[1]} dispatch={this.props.dispatch}
                   marked={this.checkIfMarked(key[0])}/>)
             )
-          else if (n === Object.entries(currencies).length && ind < Object.entries(currencies).length)
+          else if (n === (Object as any).entries(currencies).length && ind <(Object as any).entries(currencies).length)
             return (
               <Paper key={ind} style={style}>{`${key[0]}: ${key[1]}` }</Paper>
             )
@@ -79,7 +79,7 @@ const ChartSetupHOC = (Component, props) => {
       if (this.state.btnLabel==='chart') {
       // console.log('propzz in renderCurrencies', Object.entries(this.props.currencies));
         return (
-            this.makeCurrArr(Object.entries(this.props.currencies).length, brickStyle)
+            this.makeCurrArr((Object as any).entries(this.props.currencies).length, brickStyle)
         );
       } else if (Object.keys(this.props.selectedCurrencies).length > 0) {
 
@@ -93,17 +93,6 @@ const ChartSetupHOC = (Component, props) => {
 
     render() {
 
-      // console.log('ChartSetupHOC state, props:', this.state, this.props);
-
-      const currencies = () => {
-        const defaultCurrencies = ['BTC','UAH','RUB','EUR','XAU','XAG','XPT','XPD'];
-        const reduced = Object.entries(this.props.currencies).filter(cur =>
-          defaultCurrencies.includes(cur[0])).reduce((acc, cur, i) => {
-            acc[cur[0]] = cur[1];
-            return acc;
-          }, {});
-          return {...reduced,...defaultCurrencies};
-      };
 
       // console.log('renderrrrrrr', this.props.currencies);
 
@@ -113,7 +102,7 @@ const ChartSetupHOC = (Component, props) => {
           btnLabel={this.state.btnLabel}
           {...this.props}
         >
-          { this.renderCurrencies(this.props) }
+          { this.renderCurrencies() }
 
         </Component>
       )

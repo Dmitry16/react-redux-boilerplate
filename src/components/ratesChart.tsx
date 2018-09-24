@@ -1,4 +1,4 @@
-import React, { Component, propTypes } from 'react'
+import React, { Component } from 'react'
 import Paper from 'material-ui/Paper'
 import * as styles from '../css/mainCSS'
 import ChartSetupHOC from './chartSetup'
@@ -10,7 +10,12 @@ const chartStyle = {
   alignItems: 'baseline'
 }
 
-class RatesChart extends Component {
+interface RatesChartProps {
+  btnLabel,
+  callback
+}
+
+class RatesSetup extends Component<RatesChartProps, {}> {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,4 +44,4 @@ class RatesChart extends Component {
   }
 }
 
-export default ChartSetupHOC(RatesChart)
+export default ChartSetupHOC(RatesSetup)

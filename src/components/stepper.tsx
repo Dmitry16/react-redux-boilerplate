@@ -50,7 +50,7 @@ class HorizontalLinearStepper extends React.Component {
 
   render() {
     const {finished, stepIndex} = this.state;
-    const contentStyle = {margin: '0 16px', textAlign: 'center'};
+    const contentStyle: {margin: any, textAlign: any} = {margin: '0 16px', textAlign: 'center'};
 
     return (
       <div style={{width: '100%', maxWidth: 700, marginBottom: 30}}>

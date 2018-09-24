@@ -28,7 +28,7 @@ export const Header = () => {
       <AppBar
         style={ AppBarStyle }
         title="Welcome Amigo!"
-        iconElementLeft={<IconButton><MenuDrawer onClick={handleClick} /></IconButton>}
+        iconElementLeft={<IconButton><MenuDrawer/></IconButton>}
       />
     )
 }

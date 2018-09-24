@@ -1,4 +1,4 @@
-import currencyReducer from '../src/reducers/currencyReducer'
+import currencyReducer from 'reducers/currencyReducer'
 // function currencyReducer(state = {}, action) {
 //   switch(action.type) {
 //     case 'CURRENCIES_FETCHED':

@@ -4,20 +4,20 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
-import { hideInitialDialog } from '../../actions/initialDialogActions';
+import { hideInitialDialog } from 'actions/initialDialogActions';
 
 export default class InitialDialog extends React.Component {
   state = {
     open: true,
   };
 
-  componentDidMount(){
-    this.setState({open: this.props.initialDialog});
-  }
+  // componentDidMount(){
+  //   this.setState({open: this.props.initialDialog});
+  // }
 
-  componentWillUnmount(){
-    this.props.dispatch(hideInitialDialog());
-  }
+  // componentWillUnmount(){
+  //   this.props.dispatch(hideInitialDialog());
+  // }
 
   handleStartTripSorter = () => {
     this.setState({open: false,
