@@ -1,6 +1,5 @@
-import tripsFilter from '../helpers/dataFilters';
 
-export function fetchData(...searchParams) {
+export function fetchData() {
 
   // return function(dispatch) {
   //   return axios.get('data/response.json')
