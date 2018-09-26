@@ -53,6 +53,8 @@ class App extends Component<AppProps, {}> {
 
   const  { loggedIn } = this.props;
 
+  // console.log('transformChartData', transformChartData());
+
     console.log('App render this.props', this.props);
 
     const renderInit = () => {
@@ -63,7 +65,7 @@ class App extends Component<AppProps, {}> {
               <Fragment>
                 <ExchangeCalculator {...this.props} />
                 <RatesSetup {...this.props} />
-                <InitialChart />
+                <InitialChart {...this.props} />
               </Fragment>
             :
               <AuthPage />

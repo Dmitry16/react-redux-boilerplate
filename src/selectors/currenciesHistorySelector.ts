@@ -24,10 +24,10 @@ const currencies = (store) => {
 const history = store => {
   if (store.currency.history) {
     const reduced = store.currency.history.reduce((acc, cur, ind) => {
-      acc[ind] = cur['rates'];
+      acc[ind] = {'year': new Date(cur['timestamp']*1000).getFullYear(), ...cur['rates']};
       return acc;
-    }, {});
-    console.log('history reduced:', reduced);
+    }, []);
+    // console.log('history reduced:', reduced);
     return reduced;
   }
 };
@@ -38,8 +38,8 @@ const currenciesHistory = (
 ) => {
   let arr = [];
   if (filteredCurrencies, allHistory) {
-    arr = {...filteredCurrencies, ...allHistory};
-  // arr.push(allHistory);
+    // ...filteredCurrencies
+    arr = [...allHistory];
   }
   return arr;
 };
