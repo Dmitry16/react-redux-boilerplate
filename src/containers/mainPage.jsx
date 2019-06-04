@@ -16,11 +16,11 @@ export default class MainPage extends Component {
      React.cloneElement(child, this.props)
    ))
 
-   console.log('this.props.children', this.props.children);
+   console.log('this.props.children', this.props);
 
    return (
     <Paper style={styles.mainPaperStyle} zDepth={1} >
-      { this.props.children }
+      { children }
     </Paper>
     )
   }
