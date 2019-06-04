@@ -21,7 +21,6 @@ import { Header, Footer } from '../components/header';
 import ExchangeCalculator from '../components/exchangeCalculator';
 import RatesSetup from '../components/ratesChart';
 import InitialChart from '../components/charts/initialChart';
-//Material-UI Components
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import selectedCurrencies from '../selectors/selectedCurrencies';
 
