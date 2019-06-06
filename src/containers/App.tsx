@@ -22,7 +22,7 @@ import ExchangeCalculator from '../components/exchangeCalculator';
 import RatesSetup from '../components/ratesChart';
 import InitialChart from '../components/charts/initialChart';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import selectedCurrencies from '../selectors/selectedCurrencies';
+// import selectedCurrencies from '../selectors/selectedCurrencies';
 
 interface AppProps {
   store: any,
